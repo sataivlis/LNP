@@ -18,6 +18,30 @@ def createTable (c):
         r_upgrade bit default 'FALSE' not null
         )''')
 
+    c.execute('''create table if not exists
+        SR(sr_id integer PRIMARY KEY,
+        sr_name char(25) not null,
+        sr_level decimal(2,0) not null,
+        sr_star decimal(2,0) not null,
+        sr_creativity decimal(2,0) not null,
+        sr_decisionMaking decimal(2,0) not null,
+        sr_affinity decimal(2,0) not null,
+        sr_execution decimal(2,0) not null,
+        sr_upgrade bit default 'FALSE' not null
+        )''')
+
+    c.execute('''create table if not exists
+        SSR(sr_id integer PRIMARY KEY,
+        ssr_name char(25) not null,
+        ssr_level decimal(2,0) not null,
+        ssr_star decimal(2,0) not null,
+        ssr_creativity decimal(2,0) not null,
+        ssr_decisionMaking decimal(2,0) not null,
+        ssr_affinity decimal(2,0) not null,
+        ssr_execution decimal(2,0) not null,
+        ssr_upgrade bit default 'FALSE' not null
+        )''')
+
 
 
 
