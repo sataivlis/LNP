@@ -42,6 +42,10 @@ def createTable (c):
         ssr_upgrade bit default 'FALSE' not null
         )''')
 
+    c.execute('''create table if not exists
+        Characters(ch_id integer PRIMARY KEY,
+        ch_name char(25) not null)''')
+
 
 
 
