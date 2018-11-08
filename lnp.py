@@ -10,7 +10,7 @@ def main():
 def createTable (c):
 
 # create table heroine;
-    c.execute(''' CREATE TABLE IF NOT EXISITS heroine (h_ID integer PRIMARY KEY,
+    c.execute(''' CREATE TABLE IF NOT EXISTS heroine (h_ID integer PRIMARY KEY,
         h_name varchar(15) NOT NULL
         ); ''')
 
@@ -78,7 +78,7 @@ def createTable (c):
         r_decisionMaking decimal(2,0) not null,
         r_affinity decimal(2,0) not null,
         r_execution decimal(2,0) not null,
-        r_upgrade bit default 'FALSE' not null
+        r_upgrade bit default 'FALSE' not null,
         r_chid integer not null
         )''')
     
@@ -91,7 +91,7 @@ def createTable (c):
         sr_decisionMaking decimal(2,0) not null,
         sr_affinity decimal(2,0) not null,
         sr_execution decimal(2,0) not null,
-        sr_upgrade bit default 'FALSE' not null
+        sr_upgrade bit default 'FALSE' not null,
         sr_chid integer not null
         )''')
     
@@ -104,7 +104,7 @@ def createTable (c):
         ssr_decisionMaking decimal(2,0) not null,
         ssr_affinity decimal(2,0) not null,
         ssr_execution decimal(2,0) not null,
-        ssr_upgrade bit default 'FALSE' not null
+        ssr_upgrade bit default 'FALSE' not null,
         ssr_chid integer not null
         )''')
     
