@@ -1,10 +1,12 @@
 import sqlite3
+import csv
 
 def main():
     conn = sqlite3.connect('lnp.db')
     c  = conn.cursor()
     createTable(c)
-    insertC(c, conn)
+    #insertC(c, conn)
+    insertR(c, conn)
     disc(conn)
 
 
@@ -118,16 +120,26 @@ def createTable (c):
         ch_name char(25) not null)''')
 
 # insert characters;
-def insertC(c, conn):
-    
-    name = [("MO XU",),
-            ("QI BAI",),
-            ("ZEYAN LI",),
-            ("QILUO ZHOU",),
-            ]
-        
-            c.executemany('INSERT INTO Characters(ch_name) VALUES(?)', name)
-            conn.commit()
+#def insertC(c, conn):
+
+#    name = [("MO XU",),
+#            ("QI BAI",),
+#            ("ZEYAN LI",),
+#            ("QILUO ZHOU",),
+#            ]
+#
+#            c.executemany('INSERT INTO Characters(ch_name) VALUES(?)', name)
+#            conn.commit()
+
+def insertR(c,conn):
+    r_sql = "insert into R (r_name,r_level,r_star,r_creativity,r_decisionMaking,r_affinity,r_execution,r_upgrade,r_chid) values (?,?,?,?,?,?,?,?,?)"
+    with open ('r.csv','r', encoding="ISO-8859-1") as r:
+        dr = csv.DictReader(r)
+        to_db = [(i['r_name'],i['r_level'],i['r_star'],i['r_creativity'],i['r_decisionMaking'],i['r_affinity'],i['r_execution'],i['r_upgrade'],i['r_chid']) for i in dr]
+
+    c.executemany(r_sql,to_db)
+    conn.commit()
+
 
 def disc(conn):
     conn.close()
