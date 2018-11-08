@@ -1,7 +1,11 @@
 import sqlite3
 
-conn = sqlite3.connect('lnp.db')
-c  = conn.cursor()
+def main():
+    conn = sqlite3.connect('lnp.db')
+    c  = conn.cursor()
+    createTable(c)
+    disc(conn)
+
 
 def createTable (c):
 
@@ -42,28 +46,82 @@ def createTable (c):
         ); ''')
 
 # create table stage R-cards;
-c.execute(''' CREATE TABLE IF NOT EXISTS stageR (stgR_ID integer PRIMARY KEY,
-    stgR_cardD decimal(2,0) NOT NULL,
-    stgR_chapterNumber decimal(2,0) NOT NULL,
-    stgR_calcScore decimal(2,0) NOT NULL,
-    stgR_sumScore decimal(2,0) NOT NULL
-    ); ''')
+    c.execute(''' CREATE TABLE IF NOT EXISTS stageR (stgR_ID integer PRIMARY KEY,
+        stgR_cardD decimal(2,0) NOT NULL,
+        stgR_chapterNumber decimal(2,0) NOT NULL,
+        stgR_calcScore decimal(2,0) NOT NULL,
+        stgR_sumScore decimal(2,0) NOT NULL
+        ); ''')
 
-# create table stage SR-cards;
-c.execute(''' CREATE TABLE IF NOT EXISTS stageSR (stgSR_ID integer PRIMARY KEY,
-    stgSR_cardD decimal(2,0) NOT NULL,
-    stgSR_chapterNumber decimal(2,0) NOT NULL,
-    stgSR_calcScore decimal(2,0) NOT NULL,
-    stgSR_sumScore decimal(2,0) NOT NULL
-    ); ''')
+    # create table stage SR-cards;
+    c.execute(''' CREATE TABLE IF NOT EXISTS stageSR (stgSR_ID integer PRIMARY KEY,
+        stgSR_cardD decimal(2,0) NOT NULL,
+        stgSR_chapterNumber decimal(2,0) NOT NULL,
+        stgSR_calcScore decimal(2,0) NOT NULL,
+        stgSR_sumScore decimal(2,0) NOT NULL
+        ); ''')
 
-# create table stage SSR-cards;
-c.execute(''' CREATE TABLE IF NOT EXISTS stageSSR (stgSSR_ID integer PRIMARY KEY,
-    stgSSR_cardD decimal(2,0) NOT NULL,
-    stgSSR_chapterNumber decimal(2,0) NOT NULL,
-    stgSSR_calcScore decimal(2,0) NOT NULL,
-    stgSSR_sumScore decimal(2,0) NOT NULL
-    ); ''')
+    # create table stage SSR-cards;
+    c.execute(''' CREATE TABLE IF NOT EXISTS stageSSR (stgSSR_ID integer PRIMARY KEY,
+        stgSSR_cardD decimal(2,0) NOT NULL,
+        stgSSR_chapterNumber decimal(2,0) NOT NULL,
+        stgSSR_calcScore decimal(2,0) NOT NULL,
+        stgSSR_sumScore decimal(2,0) NOT NULL
+        ); ''')
+
+    c.execute('''create table if not exists
+        R(r_id integer PRIMARY KEY,
+        r_name char(25) not null,
+        r_level decimal(2,0) not null,
+        r_star decimal(2,0) not null,
+        r_creativity decimal(2,0) not null,
+        r_decisionMaking decimal(2,0) not null,
+        r_affinity decimal(2,0) not null,
+        r_execution decimal(2,0) not null,
+        r_upgrade bit default 'FALSE' not null
+        r_chid integer not null
+        )''')
+    
+    c.execute('''create table if not exists
+        SR(sr_id integer PRIMARY KEY,
+        sr_name char(25) not null,
+        sr_level decimal(2,0) not null,
+        sr_star decimal(2,0) not null,
+        sr_creativity decimal(2,0) not null,
+        sr_decisionMaking decimal(2,0) not null,
+        sr_affinity decimal(2,0) not null,
+        sr_execution decimal(2,0) not null,
+        sr_upgrade bit default 'FALSE' not null
+        sr_chid integer not null
+        )''')
+    
+    c.execute('''create table if not exists
+        SSR(sr_id integer PRIMARY KEY,
+        ssr_name char(25) not null,
+        ssr_level decimal(2,0) not null,
+        ssr_star decimal(2,0) not null,
+        ssr_creativity decimal(2,0) not null,
+        ssr_decisionMaking decimal(2,0) not null,
+        ssr_affinity decimal(2,0) not null,
+        ssr_execution decimal(2,0) not null,
+        ssr_upgrade bit default 'FALSE' not null
+        ssr_chid integer not null
+        )''')
+    
+    c.execute('''create table if not exists
+        Characters(ch_id integer PRIMARY KEY,
+        ch_name char(25) not null)''')
+
+
+def disc(conn):
+    conn.close()
+
+
+
+if __name__ == '__main__':
+    main()
+
+
 
 
 
