@@ -4,6 +4,7 @@ def main():
     conn = sqlite3.connect('lnp.db')
     c  = conn.cursor()
     createTable(c)
+    insertC(c, conn)
     disc(conn)
 
 
@@ -69,6 +70,7 @@ def createTable (c):
         stgSSR_sumScore decimal(2,0) NOT NULL
         ); ''')
 
+    # create table R cards;
     c.execute('''create table if not exists
         R(r_id integer PRIMARY KEY,
         r_name char(25) not null,
@@ -81,7 +83,8 @@ def createTable (c):
         r_upgrade bit default 'FALSE' not null,
         r_chid integer not null
         )''')
-    
+
+    # create table SR cards;
     c.execute('''create table if not exists
         SR(sr_id integer PRIMARY KEY,
         sr_name char(25) not null,
@@ -94,7 +97,8 @@ def createTable (c):
         sr_upgrade bit default 'FALSE' not null,
         sr_chid integer not null
         )''')
-    
+
+    # create table SSR cards;
     c.execute('''create table if not exists
         SSR(sr_id integer PRIMARY KEY,
         ssr_name char(25) not null,
@@ -107,11 +111,23 @@ def createTable (c):
         ssr_upgrade bit default 'FALSE' not null,
         ssr_chid integer not null
         )''')
-    
+
+    # create table characters;
     c.execute('''create table if not exists
         Characters(ch_id integer PRIMARY KEY,
         ch_name char(25) not null)''')
 
+# insert characters;
+def insertC(c, conn):
+    
+    name = [("MO XU",),
+            ("QI BAI",),
+            ("ZEYAN LI",),
+            ("QILUO ZHOU",),
+            ]
+        
+            c.executemany('INSERT INTO Characters(ch_name) VALUES(?)', name)
+            conn.commit()
 
 def disc(conn):
     conn.close()
@@ -120,15 +136,6 @@ def disc(conn):
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
 
 
 
