@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+from wtforms import Form, BooleanField, StringField, PasswordField, validators
+import sqlite3
 
 app = Flask(__name__)
 
