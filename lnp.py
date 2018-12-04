@@ -5,7 +5,7 @@ import xlrd
 
 
 def main():
-    conn = sqlite3.connect('lnp.db')
+    conn = sqlite3.connect('lnp0.db')
     c = conn.cursor()
     createTable(c)
     #insertC(c, conn)
@@ -63,40 +63,56 @@ def main():
 #
 
 
-def createTable(c):
-    
-    # create table stage R-cards;
-    c.execute(''' CREATE TABLE IF NOT EXISTS stageR (stgR_ID integer PRIMARY KEY,
-        stgR_cardID decimal(2,0) NOT NULL,
-        stgR_chapterNumber decimal(2,0) NOT NULL
-        ); ''')
-    
-    # create table stage SR-cards;
-    c.execute(''' CREATE TABLE IF NOT EXISTS stageSR (stgSR_ID integer PRIMARY KEY,
-        stgSR_cardID decimal(2,0) NOT NULL,
-        stgSR_chapterNumber decimal(2,0) NOT NULL
-        ); ''')
-    
-    # create table stage SSR-cards;
-    c.execute(''' CREATE TABLE IF NOT EXISTS stageSSR (stgSSR_ID integer PRIMARY KEY,
-        stgSSR_cardID decimal(2,0) NOT NULL,
-        stgSSR_chapterNumber decimal(2,0) NOT NULL
-        ); ''')
-    
-    # create table stage_company;
-    c.execute(''' CREATE TABLE IF NOT EXISTS stageCompany (sc_ID integer PRIMARY KEY,
-        sc_chapterNumber decimal(2,0) NOT NULL,
-        sc_companyID decimal(2,0) NOT NULL
-        ); ''')
-    
-    # create table stage;
-    c.execute(''' CREATE TABLE IF NOT EXISTS stage (s_chapterNumber integer PRIMARY KEY,
-        s_requireScore decimal(2,0) NOT NULL,
-        s_percentageC decimal(2,0) NOT NULL,
-        s_percentageDM decimal(2,0) NOT NULL,
-        s_percentageA decimal(2,0) NOT NULL,
-        s_percentageE decimal(2,0) NOT NULL
-        ); ''')
+#def createTable(c):
+#
+#    # create table stage R-cards;
+#    c.execute(''' CREATE TABLE IF NOT EXISTS stageR (stgR_ID integer PRIMARY KEY,
+#        stgR_cardID decimal(2,0) NOT NULL,
+#        stgR_chapterNumber decimal(2,0) NOT NULL
+#        ); ''')
+#
+#    # create table stage SR-cards;
+#    c.execute(''' CREATE TABLE IF NOT EXISTS stageSR (stgSR_ID integer PRIMARY KEY,
+#        stgSR_cardID decimal(2,0) NOT NULL,
+#        stgSR_chapterNumber decimal(2,0) NOT NULL
+#        ); ''')
+#
+#    # create table stage SSR-cards;
+#    c.execute(''' CREATE TABLE IF NOT EXISTS stageSSR (stgSSR_ID integer PRIMARY KEY,
+#        stgSSR_cardID decimal(2,0) NOT NULL,
+#        stgSSR_chapterNumber decimal(2,0) NOT NULL
+#        ); ''')
+#
+#    # create table stage_company;
+#    c.execute(''' CREATE TABLE IF NOT EXISTS stageCompany (sc_ID integer PRIMARY KEY,
+#        sc_chapterNumber decimal(2,0) NOT NULL,
+#        sc_companyID decimal(2,0) NOT NULL
+#        ); ''')
+#
+#    # create table stage;
+#    c.execute(''' CREATE TABLE IF NOT EXISTS stage (s_chapterNumber integer PRIMARY KEY,
+#        s_requireScore decimal(2,0) NOT NULL,
+#        s_percentageC decimal(2,0) NOT NULL,
+#        s_percentageDM decimal(2,0) NOT NULL,
+#        s_percentageA decimal(2,0) NOT NULL,
+#        s_percentageE decimal(2,0) NOT NULL
+#        ); ''')
+
+    # 不和R/SR/SSR连。
+    c.execute(''' CREATE TABLE IF NOT EXISTS UserDeck (ud_cID integer PRIMARY KEY,
+        ud_cardName decimal(2,0) NOT NULL,
+        ud_cardLevel decimal(2,0) NOT NULL,
+        ud_cardStar decimal(2,0) NOT NULL,
+        ud_cardCreativity decimal(2,0) NOT NULL,
+        ud_cardDecisiion decimal(2,0) NOT NULL,
+        ud_cardAffinity decimal(2,0) NOT NULL,
+        ud_cardExecution decimal(2,0) NOT NULL,
+        ud_cardUpgrade bit default 'FALSE' NOT NULL,
+        ud_cardCharID decimal(2,0) NOT NULL) NOT NULL
+        );''')
+
+
+
 
 
 

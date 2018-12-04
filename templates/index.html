@@ -3,5 +3,19 @@
   <div class = "jumbotron text-center">
     <h1>LNP Calculator</h1>
     <p class = "lead">This is for you to find correct number of cards</p>
+
+    <select name = "Stage">
+      {% for Stage in stages %}
+      <option value = "{{ Stage[0] }}">{{ Stage[0] }} </option>
+      {% endfor %}
+
+      
+      <input type="submit" value="Go" />
+
+
+
+    </select>
+
+
   </div>
 {% endblock %}
