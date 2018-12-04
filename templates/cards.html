@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block body %}
+
+<div class ="container">
+  <select name = "R">
+    {% for R in resultR %}
+    <option value = "{{ R[0] }}">{{ R[0] }} </option>
+    {% endfor %}
+  </select>
+  <!-- <select name = "SR">
+    {% for SR in resultSR %}
+    <option value = "{{ SR[0] }}">{{ SR[0] }} </option>
+    {% endfor %}
+  </select>
+  <select name = "SSR">
+    {% for SSR in resultSSR %}
+    <option value = "{{ SSR[0] }}">{{ SSR[0] }} </option>
+    {% endfor %}
+  </select> -->
+
+  <p>Click the button to return the value of the selected R.</p>
+
+  <input type="submit" name="Submit" />
+
+  <!-- <p id="demo"></p>
+
+  <script>
+  function myFunction() {
+    var x = document.getElementById("R").value;
+    document.getElementById("demo").innerHTML = x;
+  }
+  </script>
+
+  <select name = "c">
+    {% for c in crea %}
+    <option value = "{{ c[0] }}">{{ c[0] }} </option>
+    {% endfor %}
+  </select> -->
+
+</div>
+
+{% endblock %}
