@@ -1,12 +1,33 @@
 {% extends 'layout.html' %}
 {% block body %}
 
+<script>
+  function foo() {
+    // alert('Hello World');
+    var ch = document.getElementById("CH").value;
+    var rare = document.getElementById("rare").value;
+
+    // alert(ch + " " + rare);
+    // var location = "localhost:5000/myCards/" + ch
+
+    // for redirecting to webpage
+    var location = "http://localhost:5000/myCards/" + ch + "/" + rare
+    window.location.href = location;
+    console.log("should have redirected.. to ", location);
+
+  }
+</script>
+
 <div class ="container">
-  <select name = "R">
-    {% for R in resultR %}
+
+
+  <select id="CH" name = "CH">
+    {% for R in resultCh %}
     <option value = "{{ R[0] }}">{{ R[0] }} </option>
     {% endfor %}
   </select>
+
+
   <!-- <select name = "SR">
     {% for SR in resultSR %}
     <option value = "{{ SR[0] }}">{{ SR[0] }} </option>
@@ -18,9 +39,48 @@
     {% endfor %}
   </select> -->
 
+  <!-- <p>Click the button to return the value of the selected R.</p> -->
+
+  <!-- <input type="submit" name="Submit" /> -->
+
+
+  <select id="rare" name="rare">
+    <option value = "SSR">SSR </option>
+    <option value = "SR">SR </option>
+    <option value = "R">R </option>
+  </select>
+
+  <!-- <select name = "n">
+    {% for R in re %}
+    <option value = "{{ R[0] }}">{{ R[0] }} </option>
+    {% endfor %}
+  </select> -->
   <p>Click the button to return the value of the selected R.</p>
 
-  <input type="submit" name="Submit" />
+
+  <!-- <form method = "POST"> -->
+    <input id="submitCard" type="submit" name="Submit" onClick="foo()"/>
+    <!-- <p>Click the button to return the value of the selected R.</p>
+
+    <input type="submit" name="Submit" /> -->
+  <!-- </form> -->
+
+
+
+
+
+
+    <!-- <form method = "POST">
+      <select name = "c">
+        {% for c in crea %}
+        <option value = "{{ c[0] }}">{{ c[0] }} </option>
+        {% endfor %}
+      </select>
+      <p>Click the button to return the value of the selected R.</p>
+
+      <input type="submit" name="Submit" />
+    </form> -->
+
 
   <!-- <p id="demo"></p>
 
@@ -29,9 +89,9 @@
     var x = document.getElementById("R").value;
     document.getElementById("demo").innerHTML = x;
   }
-  </script>
+  </script> -->
 
-  <select name = "c">
+  <!-- <select name = "c">
     {% for c in crea %}
     <option value = "{{ c[0] }}">{{ c[0] }} </option>
     {% endfor %}
