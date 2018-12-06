@@ -108,15 +108,15 @@ FROM SSR
 ORDER BY ssr.ssr_affinity DESC
 
 5. Which cards meets the requirements?
-SELECT SR.sr_name
-FROM stage s, SR, stageSR sSR
-WHERE ((s.s_percentageA * SR.sr_affinity) +
-(s.s_percentageC * SR.sr_creativity) +
-(s.s_percentageDM * SR.sr_decisionMaking) +
-(s.s_percentageE * SR.sr_execution)) >= s.s_requireScore
-AND sSR.stgSR_cardID = SR.sr_id
-AND sSR.stgSR_chapterNumber = s.s_chapterNumber
-AND s.s_chapterNumber = '1.3'
+SELECT ud_cardName
+FROM UserDeck, stage, stageCompany
+WHERE ((s_percentageA * ud_cardAffinity) +
+(s_percentageC * ud_cardCreativity) +
+(s_percentageDM * ud_cardDecisionMaking) +
+(s_percentageE * ud_execution)) >= s_requireScore
+AND ud_cID = sc_companyID
+AND sc_chapterNumber = s_chapterNumber
+AND s_chapterNumber = '1.3'
 
 6. top 3 cards to clear a stage:
 SELECT SR.sr_name
