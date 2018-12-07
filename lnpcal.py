@@ -3,7 +3,7 @@ import sqlite3
 def main():
     conn = sqlite3.connect('lnp.db')
     c  = conn.cursor()
-    print ('Welcome to Love and Producer Calcualtor!')
+    print ('Welcome to Love and Producer Calcualtor (๑>◡<๑) !')
     #need to consider the case user exit
     id,inp = getCompany(c,conn)
     if id == -1:
@@ -118,6 +118,7 @@ def getCards(c,conn,id):
     prCards = list()
     cards = list()
     res = list()
+    
     w = input ('If you do not have card want to input, please type ''no'' or else press any key to continue: ')
     if w == 'no':
         return 0
@@ -153,6 +154,8 @@ def getCards(c,conn,id):
                         cardValidate = True
                         c.execute("select c_name,c_level,c_star,c_creativity,c_decisionMaking,c_affinity,c_execution,c_upgrade,c_chid,c_rareid from Cards where c_name = :card",{"card":card})
                         cardInfo = c.fetchone()
+                        
+                        print('cardInfo',cardInfo)
 #                        print ('',cardInfo)
 
                         level = input ('Plese Input Card Level: ')
@@ -169,7 +172,8 @@ def getCards(c,conn,id):
                                 if upgrade == 'TRUE' or 'FALSE':
                                     if upgrade == 'TRUE':
                                         if level == 40 and star == 5:
-                                            print('full card cardInfo',cardInfo)
+                                            #print('full card cardInfo',cardInfo)
+                                            printcard = (cardInfo[0],cardInfo[1],cardInfo[2],cardInfo[3],cardInfo[4],cardInfo[5],cardInfo[6],cardInfo[7],cardChname,cardRare)
                                         else:
                                             cr = cardInfo[3] * 1.45 + (cardInfo[3]*(level/40) - (cardInfo[3] - star *0.1))
                                             de = cardInfo[4] * 1.45 + (cardInfo[4]*(level/40) - (cardInfo[4] - star *0.1))
@@ -227,7 +231,8 @@ def getCards(c,conn,id):
                                 if upgrade == 'TRUE' or 'FALSE':
                                     if upgrade == 'TRUE':
                                         if level == 50 and star == 6:
-                                            print('full card cardInfo',cardInfo)
+                                        #print('full card cardInfo',cardInfo)
+                                            printcard = (cardInfo[0],cardInfo[1],cardInfo[2],cardInfo[3],cardInfo[4],cardInfo[5],cardInfo[6],cardInfo[7],cardChname,cardRare)
                                         else:
                                             cr = cardInfo[3] * 1.45 + (cardInfo[3]*(level/50) - (cardInfo[3] - star *0.1))
                                             de = cardInfo[4] * 1.45 + (cardInfo[4]*(level/50) - (cardInfo[4] - star *0.1))
@@ -291,7 +296,8 @@ def getCards(c,conn,id):
                                 
                                     if upgrade == 'TRUE':
                                         if level == 60 and star == 7:
-                                            print('full card cardInfo',cardInfo)
+                                            
+                                            printcard = (cardInfo[0],cardInfo[1],cardInfo[2],cardInfo[3],cardInfo[4],cardInfo[5],cardInfo[6],cardInfo[7],cardChname,cardRare)
                                         else:
                                             cr = cardInfo[3] * 1.45 + (cardInfo[3]*(level/60) - (cardInfo[3] - star *0.1))
                                             de = cardInfo[4] * 1.45 + (cardInfo[4]*(level/60) - (cardInfo[4] - star *0.1))
@@ -332,6 +338,7 @@ def getCards(c,conn,id):
                     cards.append(cardInfo)
                     prCards.append(printcard)
             #bug?????
+                print ('')
                 for ca in range(len(prCards)):
                     print (ca, str(prCards[ca])[1:-1])
 
@@ -340,7 +347,7 @@ def getCards(c,conn,id):
                 while (d == 'Y'):
                     cindex = input ('Which one do you want to delete, please enter index: ')
                     cindex = int(cindex)
-                    print (cards[cindex])
+                    del cards[cindex]
                     for ca in range(len(cards)):
                         print (ca, str(cards[ca])[1:-1])
                     d = input ('Do you want to delete any wrong info card? (Y/N): ')
@@ -379,7 +386,7 @@ def insertIntoUserDeck(c,conn,cards,id):
         newcards = (chid + car)
         c.execute("select ud_cardName from UserDeck where ud_cardName = :name and ud_cID = :id",{"name":newcards[1],"id":id})
         n = c.fetchone()
-        print ('n',n)
+#        print ('n',n)
         if n == None:
             sql = "insert into UserDeck values (?,?,?,?,?,?,?,?,?,?,?)"
             c.execute(sql,newcards)
@@ -388,7 +395,7 @@ def insertIntoUserDeck(c,conn,cards,id):
             print ('already have '+ newcards[1])
 
 
-    print (newcards)
+#    print (newcards)
 
 def oldUserCard(c,conn,id):
     choice = input('Do you want to edit your table? (1:add cards, 2: delete cards, 3: keep the same) Please select: ')
